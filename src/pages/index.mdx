@@ -1,0 +1,281 @@
+---
+layout: ../layouts/Layout.astro
+title: "MoCHA-former: Moiré-Conditioned Hybrid Adaptive Transformer for Video Demoiréing"
+description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+favicon: mocha.png
+thumbnail: screenshot-light.png
+---
+
+import Header from "../components/Header.astro";
+import Video from "../components/Video.astro";
+import HighlightedSection from "../components/HighlightedSection.astro";
+import SmallCaps from "../components/SmallCaps.astro";
+import Figure from "../components/Figure.astro";
+import Image from "../components/Image.astro";
+import TwoColumns from "../components/TwoColumns.astro";
+import YouTubeVideo from "../components/YouTubeVideo.astro";
+import LaTeX from "../components/LaTeX.astro";
+
+import { ImageComparison } from "../components/ImageComparison.tsx";
+import { VideoComparisonGallery } from "../components/VideoComparison";
+
+import outside from "../assets/outside.mp4";
+import transformer from "../assets/transformer.webp";
+import Splat from "../components/Splat.tsx"
+import dogsDiffc from "../assets/dogs-diffc.png"
+import dogsTrue from "../assets/dogs-true.png"
+
+
+import CodeBlock from "../components/CodeBlock.astro";
+import Table from "../components/Table.astro";
+export const components = {pre: CodeBlock, table: Table}
+
+import s1_left from "../assets/v090_moire_v.mp4";
+import s1_right from "../assets/v090_pred_v.mp4";
+import s1_thumb from "../assets/v090_thumbnail.png";
+
+import s2_left from "../assets/v096_moire_v.mp4";
+import s2_right from "../assets/v096_pred_v.mp4";
+import s2_thumb from "../assets/v096_thumbnail.png";
+
+import s3_left from "../assets/v102_moire_v.mp4";
+import s3_right from "../assets/v102_pred_v.mp4";
+import s3_thumb from "../assets/v102_thumbnail.png";
+
+import s4_left from "../assets/v120_moire_v.mp4";
+import s4_right from "../assets/v120_pred_v.mp4";
+import s4_thumb from "../assets/v120_thumbnail.png";
+
+import s5_left from "../assets/v140_moire_v.mp4";
+import s5_right from "../assets/v140_pred_v.mp4";
+import s5_thumb from "../assets/v140_thumbnail.png";
+
+import main_fig from "../assets/main_figure.png";
+import quan_tab4 from "../assets/Quan_tab4.png";
+import quan_tab5 from "../assets/Quan_tab5.png";
+
+import qual_fig13 from "../assets/Qual_fig13.png";
+import qual_fig14 from "../assets/Qual_fig14.png";
+
+import model_comp from "../assets/Model_Comp.png";
+
+import cmlab_logo from "../assets/cmlab_logo.png";
+import cau_logo from "../assets/cau_logo.png";
+
+<Header
+  title={frontmatter.title}
+  authors={[
+    {
+      name: "Jeahun Sung",
+    },
+    {
+      name: "Changhyun Roh",
+    },
+    {
+      name: "Chanho Eom",
+    },
+    {
+      name: "Jihyong Oh",
+      notes: ["*"],},
+  ]}
+  conference="arXiv 2025"
+  notes={[
+    {
+      symbol: "",
+      text: "Chung-Ang University",
+    },
+    {
+      symbol: "",
+      text: "Creative Vision and Multimedia Lab (CMLab)",
+    },
+    {
+      symbol: "*",
+      text: "corresponding author",
+    }
+  ]}
+  
+  links={[
+    {
+      name: "Paper",
+      url: "",
+      icon: "ri:file-pdf-2-line",
+    },
+    {
+      name: "Code (To be released)",
+      url: "",
+      icon: "ri:github-line",
+    },
+    {
+      name: "arXiv",
+      url: "https://arxiv.org/abs/2508.14423",
+      icon: "academicons:arxiv",
+    },
+    {
+      name: "Demo",
+      url: "https://youtu.be/t01uFUSa-uI",
+      icon: "ri:youtube-fill",
+    }
+  ]}
+  >
+  {/* CAU 로고 → CAU 홈페이지로 */}
+  <a slot="logo-1"
+     href="https://www.cau.ac.kr"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="inline-flex items-center p-1 rounded hover:opacity-80 focus:outline-none focus:ring">
+    <img src={cau_logo.src} alt="Chung-Ang University"
+         class="h-6 md:h-16 w-auto object-contain" />
+    <span class="sr-only">Chung-Ang University</span>
+  </a>
+
+  {/* Lab 로고 → 연구실 사이트로 */}
+  <a slot="logo-2"
+     href="https://cmlab.cau.ac.kr/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="inline-flex items-center p-1 rounded hover:opacity-80 focus:outline-none focus:ring">
+    <img src={cmlab_logo.src} alt="CMLab"
+         class="h-6 md:h-16 w-auto object-contain" />
+    <span class="sr-only">CMLab</span>
+  </a>
+</Header>
+
+TL;DR We present **MoCHA-former**, a video demoiréing transformer that decouples moiré from content and enforces spatio-temporal consistency, achieving state-of-the-art results on RAW and sRGB datasets.
+
+
+
+<HighlightedSection>
+## Demo
+
+<Figure>
+  <VideoComparisonGallery
+    slot="figure"
+    client:load
+    pairs={[
+      {
+        left:  { src: s2_left, label: "Moiréd Input Video", poster: s2_thumb, thumb: s2_thumb },
+        right: { src: s2_right, label: "Result of MoCHA-former",                      poster: s2_thumb },
+        thumb: s2_thumb
+      },
+      {
+        left:  { src: s3_left, label: "Moiréd Input Video", poster: s3_thumb, thumb: s3_thumb },
+        right: { src: s3_right, label: "Result of MoCHA-former",                      poster: s3_thumb },
+        thumb: s3_thumb
+      },
+      {
+        left:  { src: s4_left, label: "Moiréd Input Video", poster: s4_thumb, thumb: s4_thumb },
+        right: { src: s4_right, label: "Result of MoCHA-former",                      poster: s4_thumb },
+        thumb: s4_thumb
+      },
+      {
+        left:  { src: s5_left, label: "Moiréd Input Video", poster: s5_thumb, thumb: s5_thumb },
+        right: { src: s5_right, label: "Result of MoCHA-former",                      poster: s5_thumb },
+        thumb: s5_thumb
+      },
+            {
+        left:  { src: s1_left, label: "Moiréd Input Video", poster: s1_thumb, thumb: s1_thumb },
+        right: { src: s1_right, label: "Result of MoCHA-former",                      poster: s1_thumb },
+        thumb: s1_thumb
+      },
+    ]}
+    toggleButtonClassName="pointer-events-auto rounded-md px-4 py-2 text-sm
+                       bg-black/80 text-white hover:bg-black"
+  />
+
+  <span slot="caption">
+    Comparison between the moiréd input video and the result of MoCHA-former.
+  </span>
+</Figure>
+</HighlightedSection>
+
+{/* <Video source={outside} /> */}
+
+
+
+## Abstract
+
+Recent advances in portable imaging have made camera-based screen capture ubiquitous. Unfortunately, frequency aliasing between the camera’s color filter array (CFA) and the display’s sub-pixels induces moiré patterns that severely degrade captured photos and videos. Although various demoiréing models have been proposed to remove such moiré patterns, these approaches still suffer from several limitations: (i) spatially varying artifact strength within a frame, (ii) large-scale and globally spreading structures, (iii) channel-dependent statistics and (iv) rapid temporal fluctuations across frames. 
+We address these issues with the Moiré Conditioned Hybrid Adaptive Transformer (MoCHA-former), which comprises two key components: Decoupled Moiré Adaptive Demoiréing (DMAD) and Spatio-Temporal Adaptive Demoiréing (STAD). 
+DMAD separates moiré and content via a Moiré Decoupling Block (MDB) and a Detail Decoupling Block (DDB), then produces moiré-adaptive features using a Moiré Conditioning Block (MCB) for targeted restoration. STAD introduces a Spatial Fusion Block (SFB) with window attention to capture large-scale structures, and a Feature Channel Attention (FCA) to model channel dependence in RAW frames. To ensure temporal consistency, MoCHA-former performs implicit frame alignment without any explicit alignment module. We analyze moiré characteristics through qualitative and quantitative studies, and evaluate on two video datasets covering RAW and sRGB domains. MoCHA-former consistently surpasses prior methods across PSNR, SSIM, and LPIPS.
+
+<HighlightedSection>
+## Method
+
+Our proposed MoCHA-former consists of two components: \(i\) DMAD and \(ii\) STAD. DMAD aims to separate moiré patterns from content and generate moiré-adaptive features. STAD takes the moiré-adaptive features as input and focuses on removing moiré patterns in a spatio-temporal manner.
+
+<Figure>
+  <Image slot="figure" source={main_fig} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Overview of our proposed video demoiréing framework, Moire-Condtioned
+Hybrid-Adaptive Transformer (MoCHA-former). The overall framework consists two key
+modules. (1) Decoupled Moiré-Adaptive Demoiréing module (DMAD) and (2) Spatio-
+Temporal Adaptive Demoiréing module (STAD).</span>
+</Figure>
+</HighlightedSection>
+
+
+{/* ## LaTeX
+
+You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
+
+<LaTeX formula="\int_a^b f(x) dx" /> */}
+
+## Quantitative Results
+
+<Figure>
+  <Image slot="figure" source={model_comp} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Our MoCHA-former outperforms previous methods [17, 16, 2, 18, 5] in both  PSNR↑ and LPIPS↓ while using fewer parameters.</span>
+</Figure>
+
+<Figure>
+  <Image slot="figure" source={quan_tab4} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Comparison of image and video models in RAW video demoiréing dataset (RawVDemoiré dataset). The symbol “∗” denotes a model originally designed for processing sRGB images, which has been modified and retrained to handle RAW inputs.</span>
+</Figure>
+
+<Figure>
+  <Image slot="figure" source={quan_tab5} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Comparison of image and video models in sRGB video demoiréing dataset (VDemoiré dataset).</span>
+</Figure>
+
+<HighlightedSection>
+## Qualitative Results
+
+<Figure className="w-full">
+  <Image slot="figure" className="w-full h-auto" source={qual_fig13} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Qualitative results on the RawVDemoiré dataset. (a) shows the input
+moiréd frame, (e) is the corresponding ground-truth frame, and (b)-(d) present the results
+of RRID, RawVDemoiré, and MoCHA-former (Ours), respectively. As highlighted
+by the red boxes and arrows in (b), RRID fails to fully resolve the color distortion compared
+to Ours and retains stripe-like moiré patterns. Similarly, as indicated by the red boxes
+and arrows in (c), RawVDemoiré does not completely remove grid- or stripe-like moiré
+artifacts. In contrast, Ours effectively removes both grid and stripe moiré patterns while
+also restoring accurate color appearance.</span>
+</Figure>
+
+<Figure className="w-full">
+  <Image slot="figure" className="w-full h-auto" source={qual_fig14} altText="Diagram of the transformer deep learning architecture." />
+  <span slot="caption">Qualitative results on the VDemoiré dataset. (a) shows the input moiréd
+frame, (e) is the corresponding ground-truth frame, and (b)-(d) present the results of
+VDemoiré, DTNet, and MoCHA-former (Ours), respectively. As observed in (b),
+VDemoiré fails to resolve the color distortion across the entire frame compared to Ours.
+In (c), DTNet alleviates the overall color distortion; however, as highlighted by the red
+boxes and arrows, localized color artifacts from moiré patterns remain, and stripe-shaped
+moiré structures are still present. In contrast, Ours removes most of the stripe-shaped
+moiré patterns while simultaneously restoring the correct color appearance.</span>
+</Figure>
+</HighlightedSection>
+
+
+## BibTeX citation
+
+```bibtex
+@misc{sung2025mochaformer,
+      title={MoCHA-former: Moiré-Conditioned Hybrid Adaptive Transformer for Video Demoiréing}, 
+      author={Sung, Jeahun and Roh, Changhyun and Eom, Chanho and Oh, Jihyong},
+      year={2025},
+      eprint={2508.14423},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2508.14423}, 
+}
+```
+

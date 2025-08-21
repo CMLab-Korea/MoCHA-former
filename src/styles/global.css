@@ -1,0 +1,103 @@
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    /* background-color: var(--shiki-dark-bg) !important; */
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+a {
+  @apply text-blue-500 dark:text-blue-300 hover:underline;
+}
+p {
+  @apply text-lg w-full;
+}
+/* h1 {
+  @apply text-5xl text-center font-medium;
+} */
+h1 {
+  @apply text-5xl text-center font-medium;
+}
+
+/* 이모지가 포함된 제목의 경우 별도 처리 */
+h1 .emoji {
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  color: inherit;
+}
+
+h1 .text-gradient {
+  @apply bg-gradient-to-r from-orange-900 to-orange-200 text-transparent bg-clip-text;
+}
+
+/* MoCHA-former 그라데이션 */
+h1 .mocha-gradient {
+  @apply bg-gradient-to-r from-orange-900 via-orange-600 to-orange-200 text-transparent bg-clip-text;
+}
+
+/* Mo 그라데이션 */
+h1 .mo-gradient {
+  @apply bg-gradient-to-r from-orange-900 to-orange-700 text-transparent bg-clip-text;
+}
+
+/* C 그라데이션 */
+h1 .c-gradient {
+  @apply bg-gradient-to-r from-orange-800 to-orange-700 text-transparent bg-clip-text;
+}
+
+/* H 그라데이션 */
+h1 .h-gradient {
+  @apply bg-gradient-to-r from-orange-700 to-orange-600 text-transparent bg-clip-text;
+}
+
+/* A 그라데이션 */
+h1 .a-gradient {
+  @apply bg-gradient-to-r from-orange-600 to-orange-500 text-transparent bg-clip-text;
+}
+
+/* former 그라데이션 */
+h1 .former-gradient {
+  @apply bg-gradient-to-r from-orange-500 to-orange-200 text-transparent bg-clip-text;
+}
+
+/* 일반 텍스트 (그라데이션 없음) */
+h1 .ire-text,
+h1 .onditioned-text,
+h1 .ybrid-text,
+h1 .daptive-text {
+  @apply text-5xl text-center font-medium;
+}
+h2 {
+  @apply w-full text-3xl font-bold;
+}
+h3 {
+  @apply w-full text-xl font-bold;
+}
+h4 {
+  @apply w-full font-bold;
+}
+table {
+  @apply border-y-2 border-black dark:border-zinc-50;
+}
+thead {
+  @apply border-b border-black dark:border-zinc-50;
+}
+th,
+td {
+  @apply px-4;
+}
+ul {
+  @apply prose list-disc list-inside w-full;
+}
+ol {
+  @apply prose list-decimal list-inside w-full;
+}

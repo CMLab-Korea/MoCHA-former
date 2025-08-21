@@ -1,0 +1,74 @@
+---
+import type { Author, Note, Link } from "../types/types";
+import Links from "./Links.astro";
+import Authors from "./Authors.astro";
+import Notes from "./Notes.astro";
+
+interface Props {
+  title: string;
+  authors: Author[];
+  conference?: string;
+  notes?: Note[];
+  links: Link[];
+}
+
+const { title, authors, conference, notes, links } = Astro.props as Props;
+---
+
+<header class="flex flex-col gap-10 items-center mb-6">
+  <h1>
+    <span class="emoji">☕️</span> 
+    <span class="mocha-gradient">MoCHA-former</span>: 
+    <span class="mo-gradient">Mo</span><span class="ire-text">iré-</span><span class="c-gradient">C</span><span class="onditioned-text">onditioned </span>
+    <span class="h-gradient">H</span><span class="ybrid-text">ybrid </span>
+    <span class="a-gradient">A</span><span class="daptive-text">daptive </span>
+    Trans<span class="former-gradient">former</span> for Video Demoiréing
+  </h1>
+
+  <div class="flex flex-col gap-6 items-center">
+    <Authors authors={authors} />
+    {conference && <p class="text-center">{conference}</p>}
+
+{/* notes[0]↔logo-1, notes[1]↔logo-2 를 같은 줄에 배치 */}
+{/* Notes + 로고를 페어로 묶고, 3번째는 줄바꿈 후 배치 */}
+<div class="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+  {/* Pair 1: notes[0] + logo-1 */}
+    {notes?.[2] && (
+    <div class="flex items-center gap-2">
+      {notes[2].symbol && <sup>{notes[2].symbol}</sup>}
+      <span>{notes[2].text}</span>
+      {/* 로고를 붙일 거면 아래 슬롯 사용 (없으면 지워도 됨) */}
+      <slot name="logo-3" />
+    </div>
+  )}
+  {/* ⬇️ 여기로 줄바꿈 강제 */}
+  <div class="basis-full h-0"></div>
+  {notes?.[0] && (
+    <div class="flex items-center gap-2">
+      {notes[0].symbol && <sup>{notes[0].symbol}</sup>}
+      <slot name="logo-1" />
+      <span>{notes[0].text}</span>
+    </div>
+  )}
+
+  {/* Pair 2: notes[1] + logo-2 */}
+  {notes?.[1] && (
+    <div class="flex items-center gap-2">
+      {notes[1].symbol && <sup>{notes[1].symbol}</sup>}
+      <slot name="logo-2" />
+      <span>{notes[1].text}</span>
+    </div>
+  )}
+
+  
+
+  {/* Note 3 (필요시 logo-3도 함께) */}
+
+</div>
+  {<div>
+    {'{jhseong, changhyunroh, cheom, jihyongoh}@cau.ac.kr'}
+  </div>}    
+  {links && <Links links={links} />}
+    
+  </div>
+</header>
